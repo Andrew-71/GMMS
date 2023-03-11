@@ -1,0 +1,17 @@
+{
+    "servers": [
+        {
+            "name": "example_server",
+            "jar_dir": "/ssd/minecraft/example_server/fabric_server_1.19.jar",
+            "args": {
+                "java_instance": "java",
+                "xms": "2048M",
+                "xmx": "6144M"
+            },
+            "discord": {
+                "ds_webhook_link": "https://discord.com/api/webhooks/1234567890/this-is-test",
+                "ds_enabled": true
+            }
+        }
+    ]
+}

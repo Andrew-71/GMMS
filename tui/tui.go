@@ -1,0 +1,52 @@
+package tui
+
+import (
+	"os"
+	"runtime"
+	"time"
+
+	"github.com/briandowns/spinner"
+)
+
+var Reset  = "\033[0m"
+var Red    = "\033[31m"
+var Green  = "\033[32m"
+var Yellow = "\033[33m"
+var Blue   = "\033[34m"
+var Purple = "\033[35m"
+var Cyan   = "\033[36m"
+var Gray   = "\033[37m"
+var White  = "\033[97m"
+
+func init() {
+	// No colours on windows :/
+	if runtime.GOOS == "windows" {
+		Reset  = ""
+		Red    = ""
+		Green  = ""
+		Yellow = ""
+		Blue   = ""
+		Purple = ""
+		Cyan   = ""
+		Gray   = ""
+		White  = ""
+	}
+}
+
+
+func AsciiLogo() string {
+	return Cyan + `
+                ▇▇▇▇▇▇  ▇▇▇    ▇▇▇ ▇▇▇    ▇▇▇ ▇▇▇▇▇▇▇ 
+      ▇▇▇▇▇▇▇▇ ▇▇       ▇▇▇▇  ▇▇▇▇ ▇▇▇▇  ▇▇▇▇ ▇▇      
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇ ▇▇   ▇▇▇ ▇▇ ▇▇▇▇ ▇▇ ▇▇ ▇▇▇▇ ▇▇ ▇▇▇▇▇▇▇ 
+        ▇▇▇▇▇▇ ▇▇    ▇▇ ▇▇  ▇▇  ▇▇ ▇▇  ▇▇  ▇▇      ▇▇ 
+                ▇▇▇▇▇▇  ▇▇      ▇▇ ▇▇      ▇▇ ▇▇▇▇▇▇▇ 
+	` + Reset
+}
+
+// Easy way
+func GetSpinner() *spinner.Spinner {
+	s := spinner.New(spinner.CharSets[9], 100*time.Millisecond, spinner.WithWriter(os.Stderr))
+	s.Color("cyan")
+	return s
+}
