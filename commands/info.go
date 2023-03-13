@@ -9,8 +9,8 @@ import (
 
 var infoCmd = &cobra.Command{
 	Use:   "info",
-	Short: "Print information about minecraft servers",
-	Long:  `Display things like addition date and status`,
+	Short: "Print information about running minecraft servers",
+	Long:  `Display things like player numbers and start time`,
 	Run: func(cmd *cobra.Command, args []string) {
 	  fmt.Println("Info coming soon")
 	},

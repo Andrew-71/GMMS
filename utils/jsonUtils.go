@@ -64,11 +64,15 @@ func (servers Servers) SaveServer(server Server) {
 
 // These are for processes.json, and represent current Processes
 
+type Process struct {
+	Pid	int	`json:"pid"`
+	Started_at	int	`jon:"started_at"`
+}
 
 // Getters
 
 func GetAllServers() (Servers) {
-	jsonFile, err := os.Open("../servers.json")
+	jsonFile, err := os.Open("servers.json")
 	if err != nil {
 		fmt.Println(err)
 	}
