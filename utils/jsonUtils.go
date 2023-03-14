@@ -10,7 +10,6 @@ import (
 
 var ErrNotFound = errors.New("item was not found")
 
-
 type Servers struct {
 	Servers	[]Server	`json:"servers"`
 }
@@ -43,7 +42,6 @@ func (servers Servers) GetServer(server_name string) (Server, error) {
 }
 
 func (servers Servers) SaveServer(server Server) {
-
 	// Check if server already exists first (no copies allowed!)
 	found := false
 	for i := 0; i < len(servers.Servers); i++ {
@@ -57,16 +55,28 @@ func (servers Servers) SaveServer(server Server) {
 	}
 
 	file, _ := json.MarshalIndent(servers, "", " ")
-	_ = os.WriteFile("test.json", file, 0644)
-	//_ = ioutil.WriteFile("../servers.json", file, 0644)
+	_ = os.WriteFile("servers.json", file, 0644)
 }
 
 
 // These are for processes.json, and represent current Processes
 
+type Processes struct {
+	Processes []Process	`json:"processes"`
+}
+
 type Process struct {
+	Name	string	`json:"name"`
 	Pid	int	`json:"pid"`
 	Started_at	int	`jon:"started_at"`
+}
+
+func (processes Processes) SaveProcess(process Process) {
+	// No need to check the process exists since we shouldn't possibly have a copy
+	processes.Processes = append(processes.Processes, process)
+
+	file, _ := json.MarshalIndent(processes, "", " ")
+	_ = os.WriteFile("servers.json", file, 0644)
 }
 
 // Getters
@@ -76,7 +86,6 @@ func GetAllServers() (Servers) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println("Successfully Opened servers.json")
 	defer jsonFile.Close()
 	byteValue, _ := io.ReadAll(jsonFile)
 
@@ -86,6 +95,16 @@ func GetAllServers() (Servers) {
 	return servers
 }
 
-func GetAllProcessees() {
-	fmt.Println("TODO")
+func GetAllProcesses() (Processes) {
+	jsonFile, err := os.Open("processes.json")
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer jsonFile.Close()
+	byteValue, _ := io.ReadAll(jsonFile)
+
+	var processes Processes
+	json.Unmarshal(byteValue, &processes)
+
+	return processes
 }

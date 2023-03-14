@@ -1,4 +1,3 @@
-// Example application that uses all of the available API options.
 package main
 
 import (

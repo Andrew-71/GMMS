@@ -6,7 +6,6 @@ import (
 )
 
 // This command shows status info for server(s)
-
 var infoCmd = &cobra.Command{
 	Use:   "info",
 	Short: "Print information about running minecraft servers",
