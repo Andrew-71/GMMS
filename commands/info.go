@@ -12,7 +12,7 @@ import (
 var infoCmd = &cobra.Command{
 	Use:   "info",
 	Short: "Print information about minecraft server(s)",
-	Long:  `Display more detailed report on some servers, showing more information thant list command`,
+	Long:  `Display more detailed report on some servers, showing more information than list command`,
 	Run: func(cmd *cobra.Command, args []string) {
 		servers := utils.GetAllServers()
 		

@@ -1,8 +1,9 @@
 package utils
 
 import (
-	"fmt"
 	"errors"
+	"fmt"
+	//"time"
 	//"os/exec"
 )
 
@@ -26,7 +27,7 @@ func StartServer(server_name string) (error) {
 	// if err := cmd.Start(); err != nil {
 	// 	log.Fatal(err)
 	// }
-	// fmt.Println(cmd.Process)
+	//processes.SaveProcess(Process{Name: server_name, Pid: cmd.Process, Started_at: time.Now().Unix()})
 	fmt.Println(server.Name)
 
 	return nil
@@ -54,7 +55,6 @@ func StopServer(server_name string) (error) {
 }
 
 func RestartServer(server_name string) (error) {
-	
 	if err := StopServer(server_name); err != nil {
 		if err == ErrNotRunning {
 			fmt.Println("Find way to tell this to user")
