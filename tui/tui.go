@@ -65,12 +65,32 @@ func GetSpinner() *spinner.Spinner {
 
 func ServerFrame(server utils.Server) string {
 
+	is_running := false
+	processes := utils.GetAllProcesses()
+	for i := 0; i < len(processes.Processes); i++ {
+		if processes.Processes[i].Name == server.Name {
+			is_running = true
+			break
+		}
+	}
+
 	out := ""
-	out += RightPad("[" + server.Name + "]", "-", 20) + "\n"
-	out += "Running: " + "TODO\n" // process needed
-	out += "Add date: " + "TODO\n" // field missing
-	out += "Discord: " + "TODO\n" // server.Discord.Enabled stringify
-	out += "Jar: " + server.JarDir
+	out += "[" + Cyan + server.Name + Reset + "]\n"
+	out += "\tRunning: "
+	if is_running {
+		out += Green + "Yes\n"
+	} else {
+		out += Red + "No\n"
+	}
+	out += Reset + "\tAdd date: " + time.Since(time.Unix(server.AddedTime, 0)).Round(time.Second).String() + " ago\n"
+	out += "\tLast edited: " + time.Since(time.Unix(server.EditTime, 0)).Round(time.Second).String() + " ago\n"
+	out += "\tDiscord: "
+	if server.Discord.Enabled {
+		out += Green + "Yes\n"
+	} else {
+		out += Red + "No\n"
+	}
+	out += Reset + "\tJar: " + server.JarDir
 	return out
 
 	/*

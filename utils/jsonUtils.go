@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"time"
 )
 
 var ErrNotFound = errors.New("item was not found")
@@ -19,6 +20,8 @@ type Server struct {
 	JarDir	string	`json:"jar_dir"`
 	Args	[]ServerArgs	`json:"args"`
 	Discord	DiscordArgs	`json:"discord"`
+	AddedTime	int64	`json:"add_time"`
+	EditTime	int64	`json:"edit_time"`
 }
 
 type ServerArgs struct {
@@ -42,6 +45,7 @@ func (servers Servers) GetServer(server_name string) (Server, error) {
 }
 
 func (servers Servers) SaveServer(server Server) {
+	server.EditTime = time.Now().Unix()
 	// Check if server already exists first (no copies allowed!)
 	found := false
 	for i := 0; i < len(servers.Servers); i++ {
@@ -68,7 +72,7 @@ type Processes struct {
 type Process struct {
 	Name	string	`json:"name"`
 	Pid	int	`json:"pid"`
-	Started_at	int	`jon:"started_at"`
+	Started_at	int64	`jon:"started_at"`
 }
 
 func (processes Processes) SaveProcess(process Process) {

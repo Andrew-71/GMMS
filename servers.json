@@ -11,20 +11,24 @@
             "discord": {
                 "ds_webhook_link": "https://discord.com/api/webhooks/1234567890/this-is-test",
                 "ds_enabled": true
-            }
+            },
+            "add_time": 12345678,
+            "edit_time": 999999999
         },
         {
             "name": "Server 2",
             "jar_dir": "test_place/server/modded_server.jar",
             "args": {
-                "java_instance": "java",
+                "java_instance": "/path/to/java8",
                 "xms": "2048M",
                 "xmx": "6144M"
             },
             "discord": {
                 "ds_webhook_link": "https://discord.com/api/webhooks/1234567890/this-is-test",
-                "ds_enabled": true
-            }
+                "ds_enabled": false
+            },
+            "add_time": 12345678,
+            "edit_time": 544444444
         }
     ]
 }
