@@ -75,12 +75,27 @@ type Process struct {
 	Started_at	int64	`jon:"started_at"`
 }
 
+func (processes Processes) WriteToFile() {
+	file, _ := json.MarshalIndent(processes, "", " ")
+	_ = os.WriteFile("servers.json", file, 0644)
+}
+
 func (processes Processes) SaveProcess(process Process) {
 	// No need to check the process exists since we shouldn't possibly have a copy
 	processes.Processes = append(processes.Processes, process)
+	processes.WriteToFile()
+}
 
-	file, _ := json.MarshalIndent(processes, "", " ")
-	_ = os.WriteFile("servers.json", file, 0644)
+func (processes Processes) RemoveProcess(server_name string) error {
+	for i := 0; i < len(processes.Processes); i++ {
+		if processes.Processes[i].Name == server_name {
+			processes.Processes[i] = processes.Processes[len(processes.Processes)-1]
+			processes.Processes = processes.Processes[:len(processes.Processes)-1]
+			processes.WriteToFile()
+			return nil
+		}
+	}
+	return ErrNotFound
 }
 
 // Getters
