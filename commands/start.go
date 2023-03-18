@@ -23,8 +23,11 @@ var startCmd = &cobra.Command{
 				found := false
 				for j := 0; j < len(servers.Servers); j++ {
 					if servers.Servers[j].Name == args[i] {
-						utils.StartServer(args[i])
-						fmt.Println(tui.Cyan + "Starting server: " + tui.Reset + args[i])
+						if err := utils.StartServer(args[i]); err != nil {
+							fmt.Println(tui.Red + "[" + args[i] + "] Error starting server: ", err, tui.Reset)
+						} else {
+							fmt.Println("[" + tui.Cyan + args[i] + tui.Reset + "] Started server")
+						}
 						found = true
 						break
 					}

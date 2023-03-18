@@ -24,7 +24,9 @@ var rootCmd = &cobra.Command{
 	rootCmd.AddCommand(infoCmd)
 	rootCmd.AddCommand(psaCmd)
 	rootCmd.AddCommand(listCommand)
+	
 	rootCmd.AddCommand(startCmd)
+	rootCmd.AddCommand(stopCmd)
   }
   
   func Execute() {
