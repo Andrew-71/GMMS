@@ -7,7 +7,6 @@ import (
 	"time"
 
 	"a71.su/gmms/utils"
-
 	"github.com/briandowns/spinner"
 )
 
@@ -64,7 +63,6 @@ func GetSpinner() *spinner.Spinner {
 }
 
 func ServerFrame(server utils.Server) string {
-
 	is_running := false
 	processes := utils.GetAllProcesses()
 	for i := 0; i < len(processes.Processes); i++ {
@@ -74,8 +72,7 @@ func ServerFrame(server utils.Server) string {
 		}
 	}
 
-	out := ""
-	out += "[" + Cyan + server.Name + Reset + "]\n"
+	out := "[" + Cyan + server.Name + Reset + "]\n"
 	out += "\tRunning: "
 	if is_running {
 		out += Green + "Yes\n"

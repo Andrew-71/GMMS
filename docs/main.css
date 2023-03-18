@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Jost';
+    src: "fonts/Jost/Jost-VariableFont_wght.ttf";
+}
+
+@font-face {
+    font-family: UbuntuMono;
+    src: "fonts/Ubuntu_Mono/UbuntuMono-Regular.ttf";
+}
+
+body {
+    background-color: cadetblue;
+    padding: 20px 20px;
+}
+
+h1 {
+    font-family: 'Jost';
+}

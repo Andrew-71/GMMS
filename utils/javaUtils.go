@@ -23,7 +23,7 @@ func StartServer(server_name string) (error) {
 	}
 
 	// start the process here
-	// cmd := exec.Command("prog")
+	// cmd := exec.Command("java")
 	// if err := cmd.Start(); err != nil {
 	// 	log.Fatal(err)
 	// }
@@ -38,16 +38,17 @@ func StopServer(server_name string) (error) {
 	if err != nil {
 		return err
 	}
-	pid := -1
-	processes := GetAllProcesses()
-	for i := 0; i < len(processes.Processes); i++ {
-		if processes.Processes[i].Name == server_name {
-			pid = processes.Processes[i].Pid
-		}
+	process, err := GetAllProcesses().GetProcess(server_name)
+	if err != nil {
+		return err
 	}
-	if pid == -1 {
-		return ErrNotRunning
-	}
+
+	//cmd := exec.Command("kill")
+	// if err := cmd.Start(); err != nil {
+	// 	log.Fatal(err)
+	// }
+	fmt.Println(process.Pid)
+	GetAllProcesses().RemoveProcess(server_name)
 
 	// Stop process here
 

@@ -80,6 +80,15 @@ func (processes Processes) WriteToFile() {
 	_ = os.WriteFile("servers.json", file, 0644)
 }
 
+func (processes Processes) GetProcess(server_name string) (Process, error) {
+	for i := 0; i < len(processes.Processes); i++ {
+		if processes.Processes[i].Name == server_name {
+			return processes.Processes[i], nil
+		}
+	}
+	return Process{}, ErrNotFound
+}
+
 func (processes Processes) SaveProcess(process Process) {
 	// No need to check the process exists since we shouldn't possibly have a copy
 	processes.Processes = append(processes.Processes, process)
